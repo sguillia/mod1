@@ -30,9 +30,9 @@ void dumpCtn_zlayer(Box *container, int z)
 {
 	int x, y;
 
-	for (y = 0; y < BOX_REPET; y++)
+	for (y = 0; y < BOX_REPET_Y; y++)
 	{
-		for (x = 0; x < BOX_REPET; x++)
+		for (x = 0; x < BOX_REPET_X; x++)
 		{
 			Bit exist = GETBOX(x, y, z) ? 1 : 0;
 			if (exist)

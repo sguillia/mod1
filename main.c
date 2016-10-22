@@ -35,13 +35,16 @@ int main(int argc, char** argv)
 	  printf("SDL init fail\n");
 	  return 1;
 	  }*/
-	size_t container_bytes = BOX_REPET * BOX_REPET * BOX_REPET * sizeof(Box);
+	//size_t container_bytes = BOX_REPET_X * BOX_REPET_Y * BOX_REPET_Z * sizeof(Box);
+	size_t container_bytes = SIZEOF_CONTAINER;
 	Box *container = malloc(container_bytes);
 	assert(container);
 	memset(container, 0, container_bytes);
 
+	uint8_t hexagon[SIZEOF_HEXAGON];
+
 	printf("malloc'd %zu bytes for container\n", container_bytes);
-	printf("The maximal x y and z values are : %d\n", BOX_SIZE * BOX_REPET - 1);
+	//printf("The maximal x y and z values are : %d\n", BOX_SIZE * BOX_REPET - 1);
 	printf("X_CASES is %d\n", X_CASES);
 	printf("Y_LINES is %d\n", Y_LINES);
 	printf("Z_PLATE is %d\n", Z_PLATE);
@@ -85,7 +88,8 @@ int main(int argc, char** argv)
 	make_cube(container);
 	dumpCtn_zlayer(container, 0);
 
-	ray(container, (t_point){BOX_REPET * 32, BOX_REPET * 32, BOX_REPET * 32}, (t_point){0, 0, 0});
+	//project_surface(container, (t_point){BOX_REPET * 32, BOX_REPET * 32, BOX_REPET * 32}, (t_point){0, 0, 0});
+	project_surface(container, hexagon);
 
 	printf("\t---\n");
 	printf("Done parsing points. Now bridging\n");
