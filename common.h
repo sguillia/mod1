@@ -1,19 +1,8 @@
-#ifndef MOD1_H
-#define MOD1_H
+// This file can be included by GPU compiler
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <unistd.h>
-#include <assert.h>
-#include <SDL2/SDL.h>
+#ifndef COMMON_H
+#define COMMON_H
 
-#include "cl.h"
-#include "common.h"
-
-#define eprintf(str, ...) dprintf(2, "\x1b[1;31m" str "\x1b[0m", ##__VA_ARGS__)
-
-/*
 #define BOX_SIZE 32
 #define BOX_VOLUME (BOX_SIZE*BOX_SIZE*BOX_SIZE)
 #define BOX_REPET_X 10
@@ -62,16 +51,5 @@ typedef struct
 	t_point box;
 	t_point vox;
 }	t_voxel;
-*/
-
-char *load_gpu_sources(void);
-
-void	make_cube(Box *container);
-Box		newbox(void);
-void	dumpBox_top(Box box);
-void	dumpCtn_zlayer(Box *container, int z);
-///void	ray(Box *container, t_point from, t_point to);
-int		project_surface(Box *container, uint8_t *hexagon, t_cl *cl);
-void	opencl_init(t_cl *cl);
 
 #endif

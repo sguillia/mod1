@@ -4,24 +4,11 @@
 t_input_point input_points [] = {{32, 32, 32}, {32, 30, 87}};
 int input_points_nb = sizeof(input_points) / sizeof(*input_points);
 
-void *boxalloc(void)
-{
-	Box box;
-	void *mem = malloc(BOX_VOLUME / 32 * sizeof(*box));
-	return (mem);
-}
-
-Box newbox(void)
-{
-	assert(!(BOX_VOLUME % 32));
-	Box box = boxalloc();
-	assert(box);
-	memset(box, 0, BOX_VOLUME / 32 * sizeof(*box));
-	return (box);
-}
+int voxbuf_gpu_allocated = 0;
 
 int main(int argc, char** argv)
 {
+	t_cl cl;
 	/*if (SDL_Init(SDL_INIT_VIDEO) != 0 )
 	  {
 	  printf("SDL init fail\n");
@@ -88,8 +75,10 @@ int main(int argc, char** argv)
 	make_cube(container);
 	dumpCtn_zlayer(container, 0);
 
+	opencl_init(&cl);
+
 	//project_surface(container, (t_point){BOX_REPET * 32, BOX_REPET * 32, BOX_REPET * 32}, (t_point){0, 0, 0});
-	project_surface(container, hexagon);
+	project_surface(container, hexagon, &cl);
 
 	printf("\t---\n");
 	printf("Done parsing points. Now bridging\n");

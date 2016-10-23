@@ -1,6 +1,7 @@
 
 #include "mod1.h"
 
+// A "BorderBox" is a box whose 12 edges (fr: aretes) are set.
 Box newBorderBox(void)
 {
 	Box box = newbox();
@@ -30,6 +31,7 @@ void slog(char c)
 	write(1, &c, 1);
 }
 
+// Makes a container whose 12 edges are set (here, edge = a line of boxes between two vertices)
 void make_cube(Box *container)
 {
 	int x, y, z;
